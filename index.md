@@ -179,9 +179,6 @@ plt.legend(); plt.show()
 ![U-Net Model Architecture](assets/img2.png)
 
 
-<img src="assets/img2.png" alt="Elbow Method Graph" style="width:50%; display:block; margin:auto;">
-<img src="assets/img3.png" alt="Elbow Method Graph" style="width:50%; display:block; margin:auto;">
-
 A typical learning curve shows that both training and validation losses decrease over time (with some fluctuations, of course).
 
 ---
@@ -214,7 +211,6 @@ predicted_image = np.argmax(prediction, axis=3)[0, :, :]
 +------------------------+----------------------+----------------------+
 ```
 Often, the predicted mask looks quite similar to the ground truth. Small discrepancies might remain around boundary regions or less frequent classes.
-<img src="assets/img4.png" alt="Elbow Method Graph" style="width:50%; display:block; margin:auto;">
 
 ---
 
