@@ -175,6 +175,10 @@ plt.plot(epochs, loss, 'y', label='Training loss')
 plt.plot(epochs, val_loss, 'r', label='Validation loss')
 plt.legend(); plt.show()
 ```
+
+![U-Net Model Architecture](assets/img2.png)
+
+
 <img src="assets/img2.png" alt="Elbow Method Graph" style="width:50%; display:block; margin:auto;">
 <img src="assets/img3.png" alt="Elbow Method Graph" style="width:50%; display:block; margin:auto;">
 
