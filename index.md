@@ -4,7 +4,7 @@
 > **Project Goal**  
 > To develop a deep learning model (specifically, a U-Net variant) that segments satellite images into distinct classes (e.g., buildings, water, vegetation, roads, land, and unlabeled areas).  
 
-Welcome to this repository! Below, you will find an overview of how we prepared the data, built the model, trained it, and validated our results. We will also take a peek at interesting code snippets, along with short examples that (hopefully) keep you as amused as a caffeinated hamster.
+Welcome to this repository! Below, you will find an overview of how I prepared the data, built the model, trained it, and validated my results. I will also take a peek at interesting code snippets, along with short examples that (hopefully) keep you as amused as a caffeinated hamster.
 
 ---
 
@@ -25,32 +25,32 @@ The dataset consists of satellite _tiles_, each containing corresponding **image
 - **Images** are `.jpg` files containing RGB channels.  
 - **Masks** are `.png` files with assigned color codes for the different classes (building, land, road, vegetation, water, unlabeled).  
 
-For sanity checks, we read the files and discovered the usual suspects:  
+For sanity checks, I read the files and discovered the usual suspects:  
 ```bash
 ['image_part_001.png', 'image_part_002.png', 'image_part_003.png', ... ]
 ```
-We also realized that each tile might have images of slightly different sizes. Since neural networks are picky about consistent input dimensions, we decided to patchify them into smaller squares, such as 256×256 or 512×512.  
+I also realized that each tile might have images of slightly different sizes. Since neural networks are picky about consistent input dimensions, I decided to patchify them into smaller squares, such as 256×256 or 512×512.  
 
-> **Fun fact**: The reason we “patchify” large images is similar to how pizza is sliced. You don't want to feed the entire pizza into your mouth all at once. Also, slicing helps ensure each piece is uniformly sized—makes the ML pipeline quite digestible.
+> **Fun fact**: The reason I “patchify” large images is similar to how pizza is sliced. You don't want to feed the entire pizza into your mouth all at once. Also, slicing helps ensure each piece is uniformly sized—makes the ML pipeline quite digestible.
 
 ---
 
 ## Data Preprocessing
 ### 1. Image Patch Creation
-We use [patchify](https://github.com/dovahcrow/patchify.py) to split each large tile into non-overlapping 256×256 patches. Then:
+I use [patchify](https://github.com/dovahcrow/patchify.py) to split each large tile into non-overlapping 256×256 patches. Then:
 
 ```python
 image_patch_size = 256
 patched_images = patchify(image, (image_patch_size, image_patch_size, 3), step=image_patch_size)
 ```
 
-Because not all tiles' dimensions are multiples of 256, we further cropped the images so that the width and height align nicely with our chosen patch size.
+Because not all tiles' dimensions are multiples of 256, I further cropped the images so that the width and height align nicely with our chosen patch size.
 
 ### 2. Normalization & Transformations
-- **MinMaxScaler**: We normalized image pixel intensities into a [0,1] range.  
+- **MinMaxScaler**: I normalized image pixel intensities into a [0,1] range.  
 - **One-Hot Encoding for Masks**:  
-  - We mapped each RGB color in the mask to an integer (e.g., water → 0, land → 1, road → 2, etc.).  
-  - We then expanded these labels into a categorical (one-hot) format with 6 classes.  
+  - I mapped each RGB color in the mask to an integer (e.g., water → 0, land → 1, road → 2, etc.).  
+  - I then expanded these labels into a categorical (one-hot) format with 6 classes.  
 
 ```python
 labels_categorical_dataset = to_categorical(labels, num_classes=total_classes)
@@ -63,7 +63,7 @@ Thus, each label becomes a 6-dimensional vector.
 ---
 
 ## Model Architecture
-We adopt a **U-Net**-style architecture tailored for multi-class segmentation. Below is a quick summary:
+I adopt a **U-Net**-style architecture tailored for multi-class segmentation. Below is a quick summary:
 
 ![model](assets/img5.png)
 
@@ -142,10 +142,10 @@ Helps handle data imbalance. Intuitively measures how well the predicted segment
 Helps focus the model on classes that are harder to predict.
 
 ### 3. **Total Loss** 
-I sum **Dice Loss** and **Focal Loss** (weighted 1:1) to get our final objective.  
+I sum **Dice Loss** and **Focal Loss** (weighted 1:1) to get the final objective.  
 
 ### 4. **Jaccard Coefficient (IoU)** 
-Used as an additional metric to evaluate overlap between our predictions and ground truth masks.
+Used as an additional metric to evaluate overlap between the predictions and ground truth masks.
 
 > **Quick Example**: If your predicted building region has 80% overlap with the real building region, your IoU for that class is 0.8.  
 
@@ -228,7 +228,7 @@ Often, the predicted mask looks quite similar to the ground truth. Small discrep
 ---
 
 ## Model Saving
-Finally, I save our trained U-Net model as an `.h5` file (with a friendly note that the HDF5 format is somewhat “legacy” in modern Keras land):
+Finally, I save the trained U-Net model as an `.h5` file (with a friendly note that the HDF5 format is somewhat “legacy” in modern Keras land):
 
 ```python
 model.save("satellite_segmentation_full.h5")
