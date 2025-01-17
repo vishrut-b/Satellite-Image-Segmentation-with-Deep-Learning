@@ -90,7 +90,7 @@ Helps handle data imbalance. Intuitively measures how well the predicted segment
 Helps focus the model on classes that are harder to predict.
 
 ### 3. **Total Loss** 
-We sum **Dice Loss** and **Focal Loss** (weighted 1:1) to get our final objective.  
+I sum **Dice Loss** and **Focal Loss** (weighted 1:1) to get our final objective.  
 
 ### 4. **Jaccard Coefficient (IoU)** 
 Used as an additional metric to evaluate overlap between our predictions and ground truth masks.
@@ -100,7 +100,7 @@ Used as an additional metric to evaluate overlap between our predictions and gro
 ---
 
 ## Training & Validation
-We split the data into **85% training** and **15% validation**. The training happens for 100 epochs on mini-batches of 16 images at a time:
+I split the data into **85% training** and **15% validation**. The training happens for 100 epochs on mini-batches of 16 images at a time:
 
 ```python
 model.compile(optimizer="adam", 
@@ -118,7 +118,7 @@ Each epoch logs:
 - **Validation Loss, Accuracy, IoU**  
 
 ### Training Curves
-After training, we plot the **loss** and **IoU** curves:
+After training, I plot the **loss** and **IoU** curves:
 
 ```python
 plt.plot(epochs, loss, 'y', label='Training loss')
@@ -131,7 +131,7 @@ A typical learning curve shows that both training and validation losses decrease
 ---
 
 ## Results & Visualization
-We generate segmentation predictions on `X_test`. Then, we compare them to the ground truth:
+I generate segmentation predictions on `X_test`. Then, I compare them to the ground truth:
 
 ```python
 y_pred = model.predict(X_test)
@@ -166,12 +166,12 @@ Often, the predicted mask looks quite similar to the ground truth. Small discrep
 2. **Larger Patch Size**: Sometimes 512×512 patches allow the network to capture more context. (Though it may require more GPU memory.)  
 3. **Advanced Architectures**: Experiment with Transformers or state-of-the-art architectures such as SegFormer or DeepLabv3.  
 
-> **Potential Funny Side Quest**: Provide a short “Where’s Waldo?” twist—where the “Waldo” class is set to a unique color, and we see if the network can find him from a tiny satellite vantage point.
+> **Potential Funny Side Quest**: Provide a short “Where’s Waldo?” twist—where the “Waldo” class is set to a unique color, and I see if the network can find him from a tiny satellite vantage point.
 
 ---
 
 ## Model Saving
-Finally, we save our trained U-Net model as an `.h5` file (with a friendly note that the HDF5 format is somewhat “legacy” in modern Keras land):
+Finally, I save our trained U-Net model as an `.h5` file (with a friendly note that the HDF5 format is somewhat “legacy” in modern Keras land):
 
 ```python
 model.save("satellite_segmentation_full.h5")
