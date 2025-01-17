@@ -65,6 +65,8 @@ Thus, each label becomes a 6-dimensional vector.
 ## Model Architecture
 We adopt a **U-Net**-style architecture tailored for multi-class segmentation. Below is a quick summary:
 
+![model](assets/img5.png)
+
 1. **Downsampling/Encoder**: Convolution → ReLU → Dropout → MaxPooling.  
 2. **Upsampling/Decoder**: Transposed Convolution → Concatenate with corresponding encoder layer → Convolution.  
 3. **Final Output**: `Conv2D(n_classes, (1,1), activation="softmax")` for multi-class classification.  
@@ -176,7 +178,8 @@ plt.plot(epochs, val_loss, 'r', label='Validation loss')
 plt.legend(); plt.show()
 ```
 
-![U-Net Model Architecture](assets/img2.png)
+![Loss](assets/img2.png)
+![IoTLoss](assets/img3.png)
 
 
 A typical learning curve shows that both training and validation losses decrease over time (with some fluctuations, of course).
@@ -211,6 +214,7 @@ predicted_image = np.argmax(prediction, axis=3)[0, :, :]
 +------------------------+----------------------+----------------------+
 ```
 Often, the predicted mask looks quite similar to the ground truth. Small discrepancies might remain around boundary regions or less frequent classes.
+![final](assets/img4.png)
 
 ---
 
