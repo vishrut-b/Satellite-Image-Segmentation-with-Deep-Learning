@@ -235,6 +235,8 @@ model.save("satellite_segmentation_full.h5")
 ```
 
 ---
+## Credits
 
+Credits to [https://youtu.be/UBzMgr6yfpw?si=-FtLpQw6NTSbYVFJ](https://youtu.be/UBzMgr6yfpw?si=-FtLpQw6NTSbYVFJ) for inspiring the project.
 ## Contact
 Please feel free to open an Issue or Pull Request if you have any suggestions or discover potential improvements.
