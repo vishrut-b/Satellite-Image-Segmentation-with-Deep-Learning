@@ -175,6 +175,7 @@ plt.plot(epochs, loss, 'y', label='Training loss')
 plt.plot(epochs, val_loss, 'r', label='Validation loss')
 plt.legend(); plt.show()
 ```
+![U-Net Model Architecture](_assets/img2.png) ![U-Net Model Architecture](_assets/img3.png)
 
 A typical learning curve shows that both training and validation losses decrease over time (with some fluctuations, of course).
 
@@ -208,6 +209,7 @@ predicted_image = np.argmax(prediction, axis=3)[0, :, :]
 +------------------------+----------------------+----------------------+
 ```
 Often, the predicted mask looks quite similar to the ground truth. Small discrepancies might remain around boundary regions or less frequent classes.
+![U-Net Model Architecture](_assets/img4.png)
 
 ---
 
@@ -231,11 +233,3 @@ model.save("satellite_segmentation_full.h5")
 
 ## Contact
 Please feel free to open an Issue or Pull Request if you have any suggestions or discover potential improvements.
-
-Thank you for reading—may your satellite segmentation adventures be as smooth as a well-sliced pizza!
-
-```markdown
-**Author**: [Your Name Here]  
-**License**: [MIT License or Your Preference]
-```
-```
